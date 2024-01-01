@@ -7,7 +7,9 @@
     <meta name="format-detection" content="telephone=no">
     <script src="/js/library/jquery-3.3.1-min.js"></script>
     <style>
-        /* 툴팁 : from tooltip.html */
+/* hidden */
+.hidden {overflow:hidden; position:absolute; width:1px; height:1px; clip:rect(0 0 0 0); margin:-1px; padding:1px; color:transparent;} /* 사용된 이미지내 의미있는 텍스트의 대체텍스트를 제공할때 */
+/* 툴팁 : from tooltip.html */
 .tooltip_limited {display:inline-block; position:relative; white-space:normal;} /* 211012 white-space 속성 추가 */
 .tooltip {display:inline-block; font-size:1.4rem; color:var(--fc_05, #8c949e); vertical-align:middle;}
 .btn_tooltip {overflow:hidden; display:inline-block; width:2rem; height:2rem; margin-top:-.2rem; background:url(/mnbank/app/img/common/spr_ico_20x.png) no-repeat -14rem 0; background-size:25rem auto; vertical-align:middle; filter: contrast(0.2) brightness(1);}
@@ -40,7 +42,8 @@
         </div>
         <div class="section">
 
-            <div class="h2"><h2>타이틀 </h2>
+            <div class="p_sub">
+                툴팁이 나올 때
                 <div class="tooltip_limited">
                     <p class="tooltip"><button type="button" class="btn_tooltip js_tooltip"><span class="hidden">도움말 자세히보기</span></button></p>
                     <div class="tooltip_wrap" role="tooltip" aria-hidden="true">
@@ -56,6 +59,12 @@
                 </div>
             </div>
 
+        </div>
+        <div class="section">
+            <p>IOS의 경우 내용이 같이 읽혀야 할 때</p>
+            <p role="text"><strong class="hidden">계좌명</strong><span>000 예금계좌</span></p>
+            <p role="text"><strong class="hidden">계좌번호</strong><span>000-0000000-00000</span></p>
+            <button type="button" role="button"><strong>000계좌</strong><span>000-0000000-00000</span></button>
         </div>
     </div>
 </div>
