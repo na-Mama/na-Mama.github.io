@@ -2,22 +2,110 @@
 <html lang="ko">
 <head>
     <meta charset="utf-8">
-    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta id="viewport2" http-equiv="X-UA-Compatible" content="ie=edge">
-	<meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="format-detection" content="telephone=no">
+    <script src="/js/library/jquery-3.3.1-min.js"></script>
+    <style>
+        /* 툴팁 : from tooltip.html */
+.tooltip_limited {display:inline-block; position:relative; white-space:normal;} /* 211012 white-space 속성 추가 */
+.tooltip {display:inline-block; font-size:1.4rem; color:var(--fc_05, #8c949e); vertical-align:middle;}
+.btn_tooltip {overflow:hidden; display:inline-block; width:2rem; height:2rem; margin-top:-.2rem; background:url(/mnbank/app/img/common/spr_ico_20x.png) no-repeat -14rem 0; background-size:25rem auto; vertical-align:middle; filter: contrast(0.2) brightness(1);}
+.btn_tooltip span {line-height:2rem; vertical-align:bottom;}
+.btn_tooltip_x {width:3.4rem; height:3.4rem; display:block; position:absolute; top:0.5rem; right:0.5rem; background: url(/mnbank/app/img/common/ico_btn_x.png) no-repeat center center; background-size:1.4rem;}
+.tooltip_wrap {display:none; position:absolute; left:0; right:0; margin-top:.8rem; padding:2rem; border-radius:0.2rem; background-color:var(--fc_02, #26282c); color:var(--fc_08, #dde1e4); text-align:left; z-index:100;}
+.tooltip_wrap.active {display:block;}
+.tooltip_wrap .tooltip_tit {display:block; padding-right:2rem; font-size:1.6rem; font-weight:700;}
+.tooltip_wrap .tooltip_cont {margin-top:.7rem; padding-right:1.6rem; font-size:1.4rem; font-weight:400; line-height:1.437; white-space:normal;}
+.tooltip_wrap .tooltip_cont .depth {margin-top:.7rem;}
+.tooltip_wrap .tooltip_cont .p {font-size:inherit;} 
+.tooltip_wrap .tooltip_tit.hidden + .tooltip_cont {padding-right:3.2rem;}
+.tooltip_wrap .tooltip_tit + .tooltip_cont {padding-right:0;}
+.tooltip_wrap .depth li,
+.tooltip_wrap p.depth.info {color:var(--fc_08, #dde1e4); line-height:1.4;}
+.tooltip_wrap p.depth.info::before {background-position: -22rem -12rem;}
+.tooltip_wrap .depth li + li {margin-top:1rem;}
+.tooltip_wrap .depth.bul > li:before {background:var(--fc_08, #dde1e4);}
+.tooltip_wrap .btn_txt {color:var(--fc_08, #dde1e4);}
+.tooltip_wrap .btn_txt[class*="ico_arr"]:after {border-top-color:var(--fc_08, #dde1e4); border-right-color:var(--fc_08, #dde1e4);}
+.tooltip_wrap.top {bottom:25px;}
+    </style>
 </head>
 <body>
 <div id="wrap">
     <div id="container">
-        <h1 class="h1">index 페이지</h1>
+        <h1 class="h1">툴팁 예제</h1>
         <div class="section">
-            <p>나의 페이지</p>
+            <p>나의 페이지 중 툴팁 예제</p>
         </div>
         <div class="section">
-            <h1>날자 읽어주기</h1>
-            <time role=“presentation” datetime=“2019-11-04”>2019-11-04</time>
+
+            <div class="h2"><h2>타이틀 </h2>
+                <div class="tooltip_limited">
+                    <p class="tooltip"><button type="button" class="btn_tooltip js_tooltip"><span class="hidden">도움말 자세히보기</span></button></p>
+                    <div class="tooltip_wrap" role="tooltip" aria-hidden="true">
+                        <p class="tooltip_tit">툴팁 타이틀영역</p>
+                        <div class="tooltip_cont"> 
+                            기본형과 타이틀형이 있습니다. <br>
+                            현재 툴팁은 타이틀형입니다.. <br>
+                            툴팁 영역으로 기본형과 타이틀형이 있습니다. 
+                            툴팁 영역으로 기본형과 타이틀형이 있습니다.
+                        </div>
+                        <button type="button" class="btn_tooltip_x"><span class="hidden">도움말 닫기</span></button>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
+<script>
+/* 툴팁 from tooltip.html */
+var tooltipButton = {
+    init : function(){
+        $('.js_tooltip').off('click').on('click', function(){
+            _this = $(this);
+            var _winW = $('body').width(),
+                _tooltipWrap = _this.parents('.tooltip_limited').find('.tooltip_wrap'),
+                _tooltipWrapL = _this.offset().left -24,
+                _tooltipWrapR = _winW-(_this.offset().left+44),
+
+                deviceH = screen.height,
+                offsetT = _this.offset().top,
+                scrollT = $(document).scrollTop(),
+                tipWrapT = offsetT - scrollT,
+                tipWrapD = deviceH - (offsetT - scrollT);
+
+            if ( _tooltipWrap.css('display')  == 'block' ){
+                _tooltipWrap.hide().removeClass('top').attr('aria-hidden', 'true').closest('.tooltip_limited').parent().css('z-index','').parent().css('z-index','');
+            } else {
+                $('.tooltip_wrap').hide().removeClass('top').attr('aria-hidden', 'true').closest('.tooltip_limited').parent().css('z-index','').parent().css('z-index','');
+                
+                if( tipWrapT > tipWrapD ){
+                    _tooltipWrap.addClass('top');
+                }
+
+                _this.closest('.tooltip_limited').parent().css('z-index', '101').parent().css('z-index', '101');
+                _tooltipWrap.show().attr('aria-hidden', 'false');
+
+                if( _tooltipWrap.parents('.acc_pannel').parents('div').hasClass('section_f') ){
+                    _tooltipWrap.css({'left':-_tooltipWrapL-8, 'right':-_tooltipWrapR-8});
+                } else {
+                    _tooltipWrap.css({'left':-_tooltipWrapL, 'right':-_tooltipWrapR});
+                }
+            }
+
+            $('.btn_tooltip_x').off('click').on('click', function() {
+                $(this).closest('.tooltip_wrap').hide().removeClass('top').attr('aria-hidden', 'true').closest('.tooltip_limited').parent().css('z-index','').parent().css('z-index','');
+                setTimeout(function(){
+                    _this.focus();
+                },100);
+            });
+        });
+        return false;
+    }
+}
+tooltipButton.init();
+</script>
 </body>
 </html>
