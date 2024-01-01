@@ -105,10 +105,11 @@ var tooltipButton = {
             }
 
             $('.btn_tooltip_x').off('click').on('click', function() {
-                $(this).closest('.tooltip_wrap').hide().removeClass('top').attr('aria-hidden', 'true').closest('.tooltip_limited').parent().css('z-index','').parent().css('z-index','');
                 setTimeout(function(){
                     _this.focus();
                 },100);
+                $(this).closest('.tooltip_wrap').hide().removeClass('top').attr('aria-hidden', 'true').closest('.tooltip_limited').parent().css('z-index','').parent().css('z-index','');
+                
             });
         });
         return false;
