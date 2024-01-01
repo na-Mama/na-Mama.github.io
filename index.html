@@ -43,10 +43,10 @@
         <div class="section">
 
             <div class="p_sub">
-                툴팁이 나올 때 1
+                툴팁이 나올 때
                 <div class="tooltip_limited">
                     <p class="tooltip"><button type="button" class="btn_tooltip js_tooltip"><span class="hidden">도움말 자세히보기</span></button></p>
-                    <div class="tooltip_wrap" role="tooltip" aria-hidden="true">
+                    <div class="tooltip_wrap" role="tooltip">
                         <p class="tooltip_tit">툴팁 타이틀영역</p>
                         <div class="tooltip_cont"> 
                             기본형과 타이틀형이 있습니다. <br>
@@ -86,16 +86,16 @@ var tooltipButton = {
                 tipWrapD = deviceH - (offsetT - scrollT);
 
             if ( _tooltipWrap.css('display')  == 'block' ){
-                _tooltipWrap.hide().removeClass('top').attr('aria-hidden', 'true').closest('.tooltip_limited').parent().css('z-index','').parent().css('z-index','');
+                _tooltipWrap.hide();
             } else {
-                $('.tooltip_wrap').hide().removeClass('top').attr('aria-hidden', 'true').closest('.tooltip_limited').parent().css('z-index','').parent().css('z-index','');
+                $('.tooltip_wrap').hide();
                 
                 if( tipWrapT > tipWrapD ){
                     _tooltipWrap.addClass('top');
                 }
 
-                _this.closest('.tooltip_limited').parent().css('z-index', '101').parent().css('z-index', '101');
-                _tooltipWrap.show().attr('aria-hidden', 'false');
+                // _this.closest('.tooltip_limited').parent().css('z-index', '101').parent().css('z-index', '101');
+                _tooltipWrap.show();
 
                 if( _tooltipWrap.parents('.acc_pannel').parents('div').hasClass('section_f') ){
                     _tooltipWrap.css({'left':-_tooltipWrapL-8, 'right':-_tooltipWrapR-8});
@@ -106,7 +106,7 @@ var tooltipButton = {
 
             $('.btn_tooltip_x').off('click').on('click', function() {
                 _this.focus();
-                $(this).closest('.tooltip_wrap').hide().removeClass('top').attr('aria-hidden', 'true').closest('.tooltip_limited').parent().css('z-index','').parent().css('z-index','');
+                $(this).closest('.tooltip_wrap').hide();
                 
             });
         });
