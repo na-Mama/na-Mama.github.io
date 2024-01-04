@@ -43,7 +43,7 @@
         <div class="section">
 
             <div class="p_sub">
-                툴팁이 나올 때 2407
+                툴팁이 나올 때 2408
                 <div class="tooltip_limited">
                     <p class="tooltip"><button type="button" class="btn_tooltip js_tooltip"><span class="hidden">도움말 자세히보기</span></button></p>
                     <div class="tooltip_wrap" role="tooltip">
@@ -70,82 +70,82 @@
 </div>
 <script>
 /* 툴팁 from tooltip.html */
-// var tooltipFunc = {
-//     _this: '',
-//     _tooltipWrap: '',
-//     closeFunc: function(btnOPen, tooltipWrap) {
-//         $('.btn_tooltip_x').off('click').on('click', function() {
-//             btnOPen.focus();
-//             setTimeout(function(){
-//                     // _this.focus();
-//                 tooltipWrap.hide();
-//             },250);
-//         })
-//     },
-//     openFunc : function() {
-//         $('.btn_tooltip').off('click').on('click', function() {
-//             tooltipFunc._this = $(this);
-//             tooltipFunc._tooltipWrap = tooltipFunc._this.parents('.tooltip_limited').find('.tooltip_wrap');
-//             tooltipFunc._tooltipWrap.show()
+var tooltipFunc = {
+    _this: '',
+    _tooltipWrap: '',
+    closeFunc: function(btnOPen, tooltipWrap) {
+        $('.btn_tooltip_x').off('click').on('click', function() {
+            btnOPen.focus();
+            setTimeout(function(){
+                    // _this.focus();
+                tooltipWrap.hide();
+            },250);
+        })
+    },
+    openFunc : function() {
+        $('.btn_tooltip').off('click').on('click', function() {
+            tooltipFunc._this = $(this);
+            tooltipFunc._tooltipWrap = tooltipFunc._this.parents('.tooltip_limited').find('.tooltip_wrap');
+            tooltipFunc._tooltipWrap.show()
 
-//         console.log(tooltipFunc._this.text(), tooltipFunc._tooltipWrap.text())
-//         tooltipFunc.closeFunc(tooltipFunc._this, tooltipFunc._tooltipWrap)
-//         // return tooltipFunc._this, tooltipFunc._tooltipWrap;
-//         })
-//     },
-//     init : function() {
-//         tooltipFunc.openFunc();
-//     },
-// }
-// tooltipFunc.init();
+        console.log(tooltipFunc._this.text(), tooltipFunc._tooltipWrap.text())
+        tooltipFunc.closeFunc(tooltipFunc._this, tooltipFunc._tooltipWrap)
+        // return tooltipFunc._this, tooltipFunc._tooltipWrap;
+        })
+    },
+    init : function() {
+        tooltipFunc.openFunc();
+    },
+}
+tooltipFunc.init();
 
 /* 툴팁 from tooltip.html */
-var tooltipButton = {
-    init : function(){
-        $('.js_tooltip').off('click').on('click', function(){
-            _this = $(this);
-            var _winW = $('body').width(),
-                _tooltipWrap = _this.parents('.tooltip_limited').find('.tooltip_wrap'),
-                _tooltipWrapL = _this.offset().left -24,
-                _tooltipWrapR = _winW-(_this.offset().left+44),
+// var tooltipButton = {
+//     init : function(){
+//         $('.js_tooltip').off('click').on('click', function(){
+//             _this = $(this);
+//             var _winW = $('body').width(),
+//                 _tooltipWrap = _this.parents('.tooltip_limited').find('.tooltip_wrap'),
+//                 _tooltipWrapL = _this.offset().left -24,
+//                 _tooltipWrapR = _winW-(_this.offset().left+44),
 
-                deviceH = screen.height,
-                offsetT = _this.offset().top,
-                scrollT = $(document).scrollTop(),
-                tipWrapT = offsetT - scrollT,
-                tipWrapD = deviceH - (offsetT - scrollT);
+//                 deviceH = screen.height,
+//                 offsetT = _this.offset().top,
+//                 scrollT = $(document).scrollTop(),
+//                 tipWrapT = offsetT - scrollT,
+//                 tipWrapD = deviceH - (offsetT - scrollT);
 
-            if ( _tooltipWrap.css('display')  == 'block' ){
-                _tooltipWrap.hide().removeClass('top').attr('aria-hidden', 'true').closest('.tooltip_limited').parent().css('z-index','').parent().css('z-index','');
-            } else {
-                $('.tooltip_wrap').hide().removeClass('top').attr('aria-hidden', 'true').closest('.tooltip_limited').parent().css('z-index','').parent().css('z-index','');
+//             if ( _tooltipWrap.css('display')  == 'block' ){
+//                 _tooltipWrap.hide().removeClass('top').attr('aria-hidden', 'true').closest('.tooltip_limited').parent().css('z-index','').parent().css('z-index','');
+//             } else {
+//                 $('.tooltip_wrap').hide().removeClass('top').attr('aria-hidden', 'true').closest('.tooltip_limited').parent().css('z-index','').parent().css('z-index','');
                 
-                if( tipWrapT > tipWrapD ){
-                    _tooltipWrap.addClass('top');
-                }
+//                 if( tipWrapT > tipWrapD ){
+//                     _tooltipWrap.addClass('top');
+//                 }
 
-                _this.closest('.tooltip_limited').parent().css('z-index', '101').parent().css('z-index', '101');
-                _tooltipWrap.show().attr('aria-hidden', 'false');
+//                 _this.closest('.tooltip_limited').parent().css('z-index', '101').parent().css('z-index', '101');
+//                 _tooltipWrap.show().attr('aria-hidden', 'false');
 
-                if( _tooltipWrap.parents('.acc_pannel').parents('div').hasClass('section_f') ){
-                    _tooltipWrap.css({'left':-_tooltipWrapL-8, 'right':-_tooltipWrapR-8});
-                } else {
-                    _tooltipWrap.css({'left':-_tooltipWrapL, 'right':-_tooltipWrapR});
-                }
-            }
+//                 if( _tooltipWrap.parents('.acc_pannel').parents('div').hasClass('section_f') ){
+//                     _tooltipWrap.css({'left':-_tooltipWrapL-8, 'right':-_tooltipWrapR-8});
+//                 } else {
+//                     _tooltipWrap.css({'left':-_tooltipWrapL, 'right':-_tooltipWrapR});
+//                 }
+//             }
 
-            $('.btn_tooltip_x').off('click').on('click', function() {
+//             $('.btn_tooltip_x').off('click').on('click', function() {
                 
-                $(this).closest('.tooltip_wrap').hide().removeClass('top').attr('aria-hidden', 'true').closest('.tooltip_limited').parent().css('z-index','').parent().css('z-index','');
-                setTimeout(function(){
-                    _this.focus();
-                },250);
-            });
-        });
-        return false;
-    }
-}
-tooltipButton.init();
+//                 $(this).closest('.tooltip_wrap').hide().removeClass('top').attr('aria-hidden', 'true').closest('.tooltip_limited').parent().css('z-index','').parent().css('z-index','');
+//                 setTimeout(function(){
+//                     _this.focus();
+//                 },250);
+//             });
+//         });
+//         return false;
+//     }
+// }
+// tooltipButton.init();
 </script>
 </body>
 </html>
