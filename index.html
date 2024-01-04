@@ -43,7 +43,7 @@
         <div class="section">
 
             <div class="p_sub">
-                툴팁이 나올 때 2401
+                툴팁이 나올 때 2402
                 <div class="tooltip_limited">
                     <p class="tooltip"><button type="button" class="btn_tooltip js_tooltip"><span class="hidden">도움말 자세히보기</span></button></p>
                     <div class="tooltip_wrap" role="tooltip">
@@ -75,6 +75,7 @@ var tooltipFunc = {
     _tooltipWrap: '',
     closeFunc: function(btnOPen, tooltipWrap) {
         $('.btn_tooltip_x').off('click').on('click', function() {
+            btnOPen.focus();
             tooltipWrap.hide();
         })
     },
