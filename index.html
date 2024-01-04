@@ -70,50 +70,75 @@
 </div>
 <script>
 /* 툴팁 from tooltip.html */
-var tooltipButton = {
-    init : function(){
-        $('.js_tooltip').off('click').on('click', function(){
-            _this = $(this);
-            var _winW = $('body').width(),
-                _tooltipWrap = _this.parents('.tooltip_limited').find('.tooltip_wrap'),
-                _tooltipWrapL = _this.offset().left -24,
-                _tooltipWrapR = _winW-(_this.offset().left+44),
+var tooltipFunc = {
+    _this: '',
+    _tooltipWrap: '',
+    closeFunc: function(btnOPen, tooltipWrap) {
+        $('.btn_tooltip_x').off('click').on('click', function() {
+            tooltipWrap.hide();
+        })
+    },
+    openFunc : function() {
+        $('.btn_tooltip').off('click').on('click', function() {
+            tooltipFunc._this = $(this);
+            tooltipFunc._tooltipWrap = tooltipFunc._this.parents('.tooltip_limited').find('.tooltip_wrap');
+            tooltipFunc._tooltipWrap.show()
 
-                deviceH = screen.height,
-                offsetT = _this.offset().top,
-                scrollT = $(document).scrollTop(),
-                tipWrapT = offsetT - scrollT,
-                tipWrapD = deviceH - (offsetT - scrollT);
-
-            if ( _tooltipWrap.css('display')  == 'block' ){
-                _tooltipWrap.hide().attr('aria-hidden', 'true');
-            } else {
-                $('.tooltip_wrap').attr('aria-hidden', 'true');
-                
-                if( tipWrapT > tipWrapD ){
-                    _tooltipWrap.addClass('top');
-                }
-
-                // _this.closest('.tooltip_limited').parent().css('z-index', '101').parent().css('z-index', '101');
-                _tooltipWrap.show().attr('aria-hidden', 'false');
-
-                if( _tooltipWrap.parents('.acc_pannel').parents('div').hasClass('section_f') ){
-                    _tooltipWrap.css({'left':-_tooltipWrapL-8, 'right':-_tooltipWrapR-8});
-                } else {
-                    _tooltipWrap.css({'left':-_tooltipWrapL, 'right':-_tooltipWrapR});
-                }
-            }
-
-            $('.btn_tooltip_x').off('click').on('click', function() {
-                _this.focus();
-                $(this).closest('.tooltip_wrap').hide().attr('aria-hidden', 'true');
-                
-            });
-        });
-        return false;
-    }
+        console.log(tooltipFunc._this.text(), tooltipFunc._tooltipWrap.text())
+        tooltipFunc.closeFunc(tooltipFunc._this, tooltipFunc._tooltipWrap)
+        // return tooltipFunc._this, tooltipFunc._tooltipWrap;
+        })
+    },
+    init : function() {
+        tooltipFunc.openFunc();
+    },
 }
-tooltipButton.init();
+tooltipFunc.init();
+
+// var tooltipButton = {
+//     init : function(){
+//         $('.js_tooltip').off('click').on('click', function(){
+//             _this = $(this);
+//             var _winW = $('body').width(),
+//                 _tooltipWrap = _this.parents('.tooltip_limited').find('.tooltip_wrap'),
+//                 _tooltipWrapL = _this.offset().left -24,
+//                 _tooltipWrapR = _winW-(_this.offset().left+44),
+
+//                 deviceH = screen.height,
+//                 offsetT = _this.offset().top,
+//                 scrollT = $(document).scrollTop(),
+//                 tipWrapT = offsetT - scrollT,
+//                 tipWrapD = deviceH - (offsetT - scrollT);
+
+//             if ( _tooltipWrap.css('display')  == 'block' ){
+//                 _tooltipWrap.hide().attr('aria-hidden', 'true');
+//             } else {
+//                 $('.tooltip_wrap').attr('aria-hidden', 'true');
+                
+//                 if( tipWrapT > tipWrapD ){
+//                     _tooltipWrap.addClass('top');
+//                 }
+
+//                 // _this.closest('.tooltip_limited').parent().css('z-index', '101').parent().css('z-index', '101');
+//                 _tooltipWrap.show().attr('aria-hidden', 'false');
+
+//                 if( _tooltipWrap.parents('.acc_pannel').parents('div').hasClass('section_f') ){
+//                     _tooltipWrap.css({'left':-_tooltipWrapL-8, 'right':-_tooltipWrapR-8});
+//                 } else {
+//                     _tooltipWrap.css({'left':-_tooltipWrapL, 'right':-_tooltipWrapR});
+//                 }
+//             }
+
+//             $('.btn_tooltip_x').off('click').on('click', function() {
+//                 _this.focus();
+//                 $(this).closest('.tooltip_wrap').hide().attr('aria-hidden', 'true');
+                
+//             });
+//         });
+//         return false;
+//     }
+// }
+// tooltipButton.init();
 </script>
 </body>
 </html>
