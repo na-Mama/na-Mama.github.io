@@ -6,146 +6,119 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <meta name="format-detection" content="telephone=no">
     <script src="/js/library/jquery-3.3.1-min.js"></script>
-    <style>
-/* hidden */
-.hidden {overflow:hidden; position:absolute; width:1px; height:1px; clip:rect(0 0 0 0); margin:-1px; padding:1px; color:transparent;} /* 사용된 이미지내 의미있는 텍스트의 대체텍스트를 제공할때 */
-/* 툴팁 : from tooltip.html */
-.tooltip_limited {display:inline-block; position:relative; white-space:normal;} /* 211012 white-space 속성 추가 */
-.tooltip {display:inline-block; font-size:1.4rem; color:var(--fc_05, #8c949e); vertical-align:middle;}
-.btn_tooltip {overflow:hidden; display:inline-block; width:2rem; height:2rem; margin-top:-.2rem; background:url(/mnbank/app/img/common/spr_ico_20x.png) no-repeat -14rem 0; background-size:25rem auto; vertical-align:middle; filter: contrast(0.2) brightness(1);}
-.btn_tooltip span {line-height:2rem; vertical-align:bottom;}
-.btn_tooltip_x {width:3.4rem; height:3.4rem; display:block; position:absolute; top:0.5rem; right:0.5rem; background: url(/mnbank/app/img/common/ico_btn_x.png) no-repeat center center; background-size:1.4rem;}
-.tooltip_wrap {display:none; position:absolute; left:0; right:0; margin-top:.8rem; padding:2rem; border-radius:0.2rem; background-color:var(--fc_02, #26282c); color:var(--fc_08, #dde1e4); text-align:left; z-index:100;}
-.tooltip_wrap.active {display:block;}
-.tooltip_wrap .tooltip_tit {display:block; padding-right:2rem; font-size:1.6rem; font-weight:700;}
-.tooltip_wrap .tooltip_cont {margin-top:.7rem; padding-right:1.6rem; font-size:1.4rem; font-weight:400; line-height:1.437; white-space:normal;}
-.tooltip_wrap .tooltip_cont .depth {margin-top:.7rem;}
-.tooltip_wrap .tooltip_cont .p {font-size:inherit;} 
-.tooltip_wrap .tooltip_tit.hidden + .tooltip_cont {padding-right:3.2rem;}
-.tooltip_wrap .tooltip_tit + .tooltip_cont {padding-right:0;}
-.tooltip_wrap .depth li,
-.tooltip_wrap p.depth.info {color:var(--fc_08, #dde1e4); line-height:1.4;}
-.tooltip_wrap p.depth.info::before {background-position: -22rem -12rem;}
-.tooltip_wrap .depth li + li {margin-top:1rem;}
-.tooltip_wrap .depth.bul > li:before {background:var(--fc_08, #dde1e4);}
-.tooltip_wrap .btn_txt {color:var(--fc_08, #dde1e4);}
-.tooltip_wrap .btn_txt[class*="ico_arr"]:after {border-top-color:var(--fc_08, #dde1e4); border-right-color:var(--fc_08, #dde1e4);}
-.tooltip_wrap.top {bottom:25px;}
-    </style>
+<style>
+    /* body{position: relative;} */
+*{padding: 0;margin: 0;}
+.imgZone {width:100%;height: 20rem;background-color: azure;}
+.evtConZone .p {height: 7rem;background-color: aquamarine;border-bottom: 1px solid #ddd;}
+.guideCon .p {height: 4rem;background-color: #f1f1f1;border-bottom: 1px solid #d9d2d2;}
+.btnZone {padding: 1rem;}
+.btn {padding: .8rem;display: block;background-color: burlywood;text-align: center;margin: .4rem;}
+
+/* floating */
+.layer_floating_wrap {position: fixed;bottom: 0;width: 100%;left: 0;right: 0;display: none;}
+.layer_floating_wrap.show{display: block;}
+.ly_floating{padding: 1rem;background-color: white;}
+</style>
 </head>
 <body>
 <div id="wrap">
     <div id="container">
-        <h1 class="h1">툴팁 예제</h1>
         <div class="section">
-            <p>나의 페이지 중 툴팁 예제</p>
-        </div>
-        <div class="section">
-
-            <div class="p_sub">
-                툴팁이 나올 때 2408
-                <div class="tooltip_limited">
-                    <p class="tooltip"><button type="button" class="btn_tooltip js_tooltip"><span class="hidden">도움말 자세히보기</span></button></p>
-                    <div class="tooltip_wrap" role="tooltip">
-                        <p class="tooltip_tit">툴팁 타이틀영역</p>
-                        <div class="tooltip_cont" role="text"> 
-                            기본형과 타이틀형이 있습니다. <br>
-                            현재 툴팁은 타이틀형입니다.. <br>
-                            툴팁 영역으로 기본형과 타이틀형이 있습니다. 
-                            툴팁 영역으로 기본형과 타이틀형이 있습니다.
-                        </div>
-                        <button type="button" class="btn_tooltip_x" role="button"><span class="hidden">도움말 닫기</span></button>
-                    </div>
-                </div>
+            <div class="imgZone">
+                img zone
             </div>
-
         </div>
-        <div class="section">
-            <p>IOS의 경우 내용이 같이 읽혀야 할 때</p>
-            <p role="text"><strong class="hidden">계좌명</strong><span>000 예금계좌</span></p>
-            <p role="text"><strong class="hidden">계좌번호</strong><span>000-0000000-00000</span></p>
-            <button type="button" role="button"><strong>000계좌</strong><span>000-0000000-00000</span></button>
+        <div class="btnZone">
+            <a href="#none" class="btn" data-floating-format="button">이벤트 신청 01</a>
+            <a href="#none" class="btn" data-floating-format="">이벤트 신청 02</a>
+            <a href="#none" class="btn">이벤트 신청 03</a>
+        </div>
+        <div class="evtConZone" data-floating-format="cont_start">
+            <p class="p">contents zone1</p>
+            <p class="p">contents zone2</p>
+            <p class="p">contents zone3</p>
+            <p class="p">contents zone4</p>
+            <p class="p">contents zone5</p>
+            <p class="p">contents zone6</p>
+            <p class="p">contents zone7</p>
+            <p class="p">contents zone8</p>
+            <p class="p">contents zone9</p>
+            <p class="p">contents zone10</p>
+            <p class="p">contents zone11</p>
+            <p class="p">contents zone12</p>
+            <p class="p">contents zone13</p>
+            <p class="p">contents zone14</p>
+            <p class="p">contents zone15</p>
+        </div>
+        <div class="btnZone">
+            <a href="#none" class="btn" data-floating-format="button">이벤트 신청 하단 01</a>
+            <a href="#none" class="btn" data-floating-format="button">이벤트 신청 하단02</a>
+            <a href="#none" class="btn">이벤트 신청 02</a>
+        </div>
+        <div class="guideCon" data-floating-format="cont_end">
+            <p class="p">content end 1</p>
+            <p class="p">content end 2</p>
+            <p class="p">content end 3</p>
+            <p class="p">content end 4</p>
         </div>
     </div>
 </div>
+
+<!-- <div class="layer_floating_wrap"><div class="ly_floating"><a href="#none" class="btn" data-floating-format="button btn1">이벤트 신청 01</a></div></div> -->
 <script>
-/* 툴팁 from tooltip.html */
-var tooltipFunc = {
-    _this: '',
-    _tooltipWrap: '',
-    closeFunc: function(btnOPen, tooltipWrap) {
-        $('.btn_tooltip_x').off('click').on('click', function() {
-            btnOPen.focus();
-            setTimeout(function(){
-                    // _this.focus();
-                tooltipWrap.hide();
-            },250);
+// 
+const dataEvtFormat = {
+    dataformatEL: document.querySelectorAll('[data-floating-format]'),
+    scroller: document.querySelector('body'),
+    offsetVal_T : '',
+    offsetVal_E : '',
+    // 세팅
+    set: function (){
+        let dataformatLength = dataEvtFormat.dataformatEL.length;
+        let btnEl = '';
+        let maxCount = 0;
+        for(i=0; i<dataformatLength; i++){
+            let dataVal = dataEvtFormat.dataformatEL[i].getAttribute('data-floating-format');
+            if(dataVal === 'cont_start'){
+                dataEvtFormat.offsetVal_T = dataEvtFormat.dataformatEL[i].offsetTop;
+            } else if(dataVal === 'cont_end'){
+                dataEvtFormat.offsetVal_E = dataEvtFormat.dataformatEL[i].offsetTop - window.innerHeight;
+            } else if(dataVal === 'button') {
+                if(maxCount < 2){
+                    btnEl += dataEvtFormat.dataformatEL[i].outerHTML;
+                }
+                maxCount++;
+            }
+        }
+        const divEl = document.createElement('div');
+        divEl.className = 'layer_floating_wrap';
+        let template = `<div class="ly_floating"> 
+                ${btnEl} 
+                </div>`;
+        divEl.innerHTML = template;
+        document.body.append(divEl);
+    },
+    // 위치
+    pose: function() {
+        let layerPop = document.querySelectorAll('.layer_floating_wrap')[0];
+        window.addEventListener('scroll', function() {
+            console.log(dataEvtFormat.offsetVal_E," : " , window.scrollY, " : ",dataEvtFormat.offsetVal_T);
+            if(dataEvtFormat.offsetVal_E <= window.scrollY || dataEvtFormat.offsetVal_T >= window.scrollY) {
+                layerPop.classList.remove('show');
+            } else if (dataEvtFormat.offsetVal_T <= window.scrollY){
+                layerPop.classList.add('show');
+            }
         })
     },
-    openFunc : function() {
-        $('.btn_tooltip').off('click').on('click', function() {
-            tooltipFunc._this = $(this);
-            tooltipFunc._tooltipWrap = tooltipFunc._this.parents('.tooltip_limited').find('.tooltip_wrap');
-            tooltipFunc._tooltipWrap.show()
-
-        console.log(tooltipFunc._this.text(), tooltipFunc._tooltipWrap.text())
-        tooltipFunc.closeFunc(tooltipFunc._this, tooltipFunc._tooltipWrap)
-        // return tooltipFunc._this, tooltipFunc._tooltipWrap;
-        })
-    },
-    init : function() {
-        tooltipFunc.openFunc();
-    },
+    init: function () {
+        dataEvtFormat.set();
+        dataEvtFormat.pose();
+        
+    }
 }
-tooltipFunc.init();
 
-/* 툴팁 from tooltip.html */
-// var tooltipButton = {
-//     init : function(){
-//         $('.js_tooltip').off('click').on('click', function(){
-//             _this = $(this);
-//             var _winW = $('body').width(),
-//                 _tooltipWrap = _this.parents('.tooltip_limited').find('.tooltip_wrap'),
-//                 _tooltipWrapL = _this.offset().left -24,
-//                 _tooltipWrapR = _winW-(_this.offset().left+44),
-
-//                 deviceH = screen.height,
-//                 offsetT = _this.offset().top,
-//                 scrollT = $(document).scrollTop(),
-//                 tipWrapT = offsetT - scrollT,
-//                 tipWrapD = deviceH - (offsetT - scrollT);
-
-//             if ( _tooltipWrap.css('display')  == 'block' ){
-//                 _tooltipWrap.hide().removeClass('top').attr('aria-hidden', 'true').closest('.tooltip_limited').parent().css('z-index','').parent().css('z-index','');
-//             } else {
-//                 $('.tooltip_wrap').hide().removeClass('top').attr('aria-hidden', 'true').closest('.tooltip_limited').parent().css('z-index','').parent().css('z-index','');
-                
-//                 if( tipWrapT > tipWrapD ){
-//                     _tooltipWrap.addClass('top');
-//                 }
-
-//                 _this.closest('.tooltip_limited').parent().css('z-index', '101').parent().css('z-index', '101');
-//                 _tooltipWrap.show().attr('aria-hidden', 'false');
-
-//                 if( _tooltipWrap.parents('.acc_pannel').parents('div').hasClass('section_f') ){
-//                     _tooltipWrap.css({'left':-_tooltipWrapL-8, 'right':-_tooltipWrapR-8});
-//                 } else {
-//                     _tooltipWrap.css({'left':-_tooltipWrapL, 'right':-_tooltipWrapR});
-//                 }
-//             }
-
-//             $('.btn_tooltip_x').off('click').on('click', function() {
-                
-//                 $(this).closest('.tooltip_wrap').hide().removeClass('top').attr('aria-hidden', 'true').closest('.tooltip_limited').parent().css('z-index','').parent().css('z-index','');
-//                 setTimeout(function(){
-//                     _this.focus();
-//                 },250);
-//             });
-//         });
-//         return false;
-//     }
-// }
-// tooltipButton.init();
+dataEvtFormat.init()
 </script>
 </body>
 </html>
